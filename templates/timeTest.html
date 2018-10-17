@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Time</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" type="text/css"  href="{{ url_for('static', filename='assets/css/main.css') }}" />
+		<noscript><link rel="stylesheet" href="{{ url_for('static', filename='assets/css/nonscript.css') }}" /></noscript>
+	</head>
+<body>
+
+                    <section>
+                        <h3>Time Table</h3>
+                        <div class="table-wrapper">
+										<table class="alt">
+											<thead>
+												<tr>
+													<th>ID</th>
+													<th>Time</th>
+												</tr>
+											</thead>
+											<tbody>
+                                             {% for time in timeClass %}
+                                                 <div id="time{{ time.id}}">
+                                                     {% set first = time.timeCount/3600 %}
+                                                        {% set first = first|int %}
+                                                        {% set FF = "{:02d}".format(first) %}
+
+                                                        {% set second = time.timeCount%3600/60 %}
+                                                        {% set second = second|int %}
+                                                        {% set SS = "{:02d}".format(second)  %}
+
+                                                        {% set third = time.timeCount%60 %}
+                                                        {% set third = third|int %}
+                                                        {% set TT = "{:02d}".format(third) %}
+												<tr>
+													<td>{{ time.id }}</td>
+													<td>{{ FF+":"+SS+":"+TT }}</td>
+												</tr>
+                                            {% endfor %}
+                                                  </div>
+											</tbody>
+											<tfoot>
+												<tr>
+													<td colspan="1"></td>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+                        </section>
+
+
+</body>
+</html>
+
+
+<script src="/static/js/moment.min.js"></script>

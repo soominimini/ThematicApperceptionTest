@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css"  href="{{ url_for('static', filename='assets/css/search.css') }}" />
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <input type="text" placeholder="검색">
+    <button>검색</button>
+</div>
+
+<h5>
+    {% for descript_respective in descript %}
+
+<li>{{ descript_respective.descript }}</li>
+
+    {% endfor %}
+
+</h5>
+
+
+</body>
+</html>

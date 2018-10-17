@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+<script language = "javascript">
+
+  function output(form) {
+    for(var i = 0; i < form.check.length; i++) {
+      if(form.check[i].checked) {
+              if(form.check[i].value=="male") {
+                    str = "male"
+                 location.replace(str); <!--location.replace는 들어오는 문자열 그대로 url뒤에 붙여줌-->
+              }
+                  if(form.check[i].value=="female"){
+                     str = "female"
+                  location.replace(str);
+                  }
+                      if(form.check[i].value=="child") {
+                          str = "child"
+                          location.replace(str);
+                      }
+        break;
+
+     }
+
+    }
+  }
+</script>
+
+<form  name = "select_form">
+
+  성별을 선택하시오<br><br>
+
+    <input type="radio" name="check" value="male">Male
+    <input type="radio" name="check" value="female"  >Female
+    <input type="radio" name="check" value="child">Child
+    <input type="button" value="submit" onclick="output(this.form)">
+</form>
+
+
+
+<!-- 각각 들어오는 값에 따라 url for()을 하는게 나을 듯 함 femael_lsit를 넣든 male_list를 넣든 redirect(url_for 도 괜찮을 듯)-->
+</body>
+</html>
+

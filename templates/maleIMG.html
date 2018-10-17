@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css"  href="{{ url_for('static', filename='assets/css/main.css') }}" />
+</head>
+<body>
+		<!-- Header -->
+			<header id="header">
+				<a class="title">TAT (Thematic Apperception Test)</a>
+                <!-- index.html은 현재의 화면이 다시 뜸-->
+				<nav>
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li><a href="/#one" class="active">Test</a></li>
+						<li><a href="elements.html">Elements</a></li>
+					</ul>
+				</nav>
+			</header>
+
+           <!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<section id="main" class="wrapper">
+						<div class="inner">
+							<h1 class="major"></h1>
+
+                                {% if male.name %}
+                            <span class="image fit"> <img id="male" src="/male/{{ male.name }}" width="100px" height="700px" alt="" ></span>
+                                    {% else %} 사진이 없습니다.
+
+						</div>
+					</section>
+
+			</div>
+{% endif %}
+
+<form action="" id="form_id" method="post">
+	<textarea  name="txt" id="textInput" cols="100" rows="10"></textarea>
+	<input type="button"  name="submit_id" id="btn" value="전송" onclick="postFunc()"/>
+
+</form>
+
+	<script type="text/javascript">
+
+   function validation() {
+       var strText = document.getElementById("textInput").value;
+       if (strText == '') {
+           alert("다음 페이지로 넘어가기 위해서는 먼저 문자를 입력하셔야 합니다.");
+           return false;
+       } else {
+           return true;
+       }
+   }
+
+   function postFunc() {
+       if (validation()) // Calling validation function
+        {
+            document.getElementById("form_id").submit(); //form submission
+            alert("다음 검사 페이지로 이동합니다.");
+        }
+        }
+</script>
+
+		<!-- Scripts -->
+			<script src="{{ url_for('static', filename='assets/js/main.js') }}" ></script>
+			<script src="{{ url_for('static', filename='assets/js/jquery.scrollex.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/jquery.scrolly.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/skel.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+</body>
+The above image is (c) [HARVARD UNIVERSITY PRESS] and is being used here under the provisions of academic fair use
+</html>

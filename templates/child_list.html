@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+<a href="{{ url_for('writeChild') }}">새 글쓰기</a>
+
+{% for child in child %}
+    <div id="child{{ child.id}}">
+        <a href="/child/{{ child.id }}">{{child.name}}</a>
+
+    </div>
+{% endfor %}
+</body>
+</html>

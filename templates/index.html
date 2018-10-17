@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Thematic Apperception Test</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" type="text/css"  href="{{ url_for('static', filename='assets/css/main.css') }}" />
+
+        <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Sidebar -->
+			<section id="sidebar">
+				<div class="inner">
+					<nav>
+						<ul>
+							<li><a href="#intro">Welcome</a></li>
+							<li><a href="#one">TEST</a></li>
+							<li><a href="#two">Purpose</a></li>
+						</ul>
+					</nav>
+				</div>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Intro -->
+					<section id="intro" class="wrapper style1 fullscreen fade-up">
+						<div class="inner">
+							<h1>Thematic Apperception Test</h1>
+							<p>주제 통각 검사<br>
+							TAT를 실시하고 그 결과를 보여주는 시스템</p>
+							<ul class="actions">
+								<li><a href="#one" class="button scrolly">next</a></li>
+							</ul>
+						</div>
+					</section>
+
+				<!-- One -->
+					<section id="one" class="wrapper style2 spotlights">
+						<section>
+                            <div class="inner">
+							<a class="image"><img src="{{ url_for('static', filename='images/TAT.jpg') }}" alt="" data-position="center center" /></a>
+                            </div>
+                                <div class="content">
+								<div class="inner">
+                                    <p></p>
+								</div>
+							</div>
+						</section>
+                        <div class="inner">
+                        <div class="features">
+								<section>
+									<span class="icon major fa-female"></span>
+                                    <h3><a href="/female">Female </a></h3>
+									<p>여성용 검사 도판</p>
+								</section>
+								<section>
+									<span class="icon major fa-male"></span>
+									<h3><a href="/male">Male </a></h3>
+									<p>남성용 검사 도판</p>
+								</section>
+
+							</div>
+                            </div>
+					</section>
+
+				<!-- Two -->
+					<section id="two" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>Purpose</h2>
+							<div class="features">
+								<section>
+									<span class="icon major fa-database"></span>
+									<h3>Database</h3>
+									<p>사용자가 입력한 텍스트를 데이터베이스에 넣어서 관리를 합니다. 따라서 이전에 피검자가 어떤 반응을 보였는지를 확인할 수 있습니다.</p>
+								</section>
+								<section>
+									<span class="icon major fa-search"></span>
+									<h3>효율성</h3>
+									<p>검사자가 먼저 NLP를 통해 객관적으로 분석이 된 결과를 확인한 후 결과를 분석함으로써 전체 분석 시간을 단축시킬 수 있습니다.</p>
+								</section>
+								<section>
+									<span class="icon major fa-check"></span>
+									<h3>객관성</h3>
+									<p>구글의 NLP 기술로 분석한 검사 결과를 참고힘으로써, 검사자는 결과를 해석할 때에 객관성을 부여받을 수 있습니다.</p>
+								</section>
+								<section>
+									<span class="icon major fa-internet-explorer"></span>
+									<h3>접근성</h3>
+									<p>피검자는 검사를 하기 위해 검사실에 방문하지 않아도 검사실에서 하는 것과 동일한 검사를 언제 어디서든 실시할 수 있습니다.</p>
+								</section>
+							</div>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="{{ url_for('static', filename='assets/js/main.js') }}" ></script>
+			<script src="{{ url_for('static', filename='assets/js/jquery.scrollex.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/jquery.scrolly.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/skel.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+	</body>
+</html>
