@@ -16,6 +16,7 @@ import re
 import pandas as pd
 import numpy as np
 
+import six
 
 #결과를 워드클라우드 형태로 보여주기 위한 패키지 import
 from collections import Counter
@@ -57,13 +58,6 @@ class Female(db.Model):
         self.id = id
         self.name = name
 
-class Child(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20))
-
-    def __init__(self,id = None,  name=None):
-        self.id = id
-        self.name = name
 
     #문자열 DB 남자문자열, 여자문자열, 아동문자열
 class MaleString(db.Model):
@@ -82,15 +76,15 @@ class FemaleString(db.Model):
         self.id = id
         self.descript = descript
 
-class ChildString(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    descript = db.Column(db.VARCHAR(150))
-
-    def __init__(self, id = None, descript=None):
-        self.id = id
-        self.descript = descript
-
 class TimeDB(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    timeCount = db.Column(db.Integer)
+
+    def __init__(self, id = None, timeCount=None):
+        self.id = id
+        self.timeCount = timeCount
+
+class TimeDB_female(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     timeCount = db.Column(db.Integer)
 
@@ -145,6 +139,40 @@ def analyze(i):
 #The return type must be a string, tuple, Response instance, or WSGI callable
 
 
+#엔터티 감정 분석 함수
+def entity_sentiment_text(i):
+    """Detects entity sentiment in the provided text."""
+    client = language.LanguageServiceClient()
+
+    male_descript = MaleString.query.get(i).descript
+    text = male_descript
+
+    if isinstance(text, six.binary_type):
+        text = text.decode('utf-8')
+
+    document = types.Document(
+        content=text.encode('utf-8'),
+        type=enums.Document.Type.PLAIN_TEXT)
+
+    # Detect and send native Python encoding to receive correct word offsets.
+    encoding = enums.EncodingType.UTF32
+    if sys.maxunicode == 65535:
+        encoding = enums.EncodingType.UTF16
+
+    result = client.analyze_entity_sentiment(document, encoding)
+
+    for entity in result.entities:
+        print('Mentions: ')
+        print(u'Name: "{}"'.format(entity.name))
+        for mention in entity.mentions:
+            print(u'  Begin Offset : {}'.format(mention.text.begin_offset))
+            print(u'  Content : {}'.format(mention.text.content))
+            print(u'  Magnitude : {}'.format(mention.sentiment.magnitude))
+            print(u'  Sentiment : {}'.format(mention.sentiment.score))
+            print(u'  Type : {}'.format(mention.type))
+        print(u'Salience: {}'.format(entity.salience))
+        print(u'Sentiment: {}\n'.format(entity.sentiment))
+
 
 @app.route('/')
 def index():
@@ -161,10 +189,6 @@ def female_list():
     female = Female.query.all()
     return render_template('female_list.html', female = female)
 
-@app.route('/child/')
-def child_list():
-    child = Child.query.all()
-    return render_template('child_list.html', child = child)
 
 
 # 실제 이미지 파일을 보여주는 페이지
@@ -209,9 +233,27 @@ def male_detail(id):
 @app.route('/femaleTest/<id>', methods=['GET', 'POST'])
 def female_detail(id):
     if request.method=="GET":
+        db.session.commit()
+        global start_female_time
+        start_female_time = time.time()
+        print(start_female_time)
         female = Female.query.get(id) # Picture.query.all(id = 1).first() 같은 방식으로 가져올 수도 있음
         return render_template('femaleIMG.html', female = female)
+
     elif request.method=="POST":
+
+        e = int(time.time()-start_female_time)
+        print('{:02d}:{:02d}:{:02d}'.format(e // 3600, (e % 3600 // 60), e % 60))
+
+        #  time_mesure(e)
+        timedb_f = TimeDB_female()
+        time_f_id = Female.query.get(id).id
+        timedb_f.id = time_f_id
+        timedb_f.timeCount = e
+        db.session.add(timedb_f)
+        db.session.commit()
+        # 시간 DB 객체 생성하고 데이터 저장
+
         # 페이지 하나씩 차례로 넘기는 코드
         strF = FemaleString()
         strF.id = id
@@ -224,11 +266,6 @@ def female_detail(id):
         femme = Male.query.get(id)
         return render_template('femaleIMG.html', female=femme)
 
-# 실제 이미지 파일을 보여주는 페이지
-@app.route('/childTest/<id>', methods=['GET'])
-def child_detail(id):
-    child = Child.query.get(id) # Picture.query.all(id = 1).first() 같은 방식으로 가져올 수도 있음
-    return render_template('childIMG.html', child=child)
 
 
 #새로운 글 쓰는 페이지
@@ -273,26 +310,6 @@ def writeFemale():
 
             return redirect(url_for('female_list'))  # url_for 뒤에는 html파일 이름이 오는 게 아니라 함수이름이 온다
 
-@app.route('/numbers/childNew', methods=['GET', 'POST'])
-def writeChild():
-            if request.method == "GET":
-                return render_template("create.html")
-
-            elif request.method == "POST":
-                child = Child()
-                child.id = request.form['title']
-                image = request.files['image']
-                image_name = secure_filename(
-                    image.filename)  # use this function to secure a filename before storing it directly on the filesystem.
-
-                image.save('child/' + image_name)  # image saving( filepath , image name)
-                # use the save() method of the file to save the file permanently somewhere on the filesystem
-
-                child.name = image_name  # database insert
-                db.session.add(child)
-                db.session.commit()
-
-                return redirect(url_for('child_list'))  # url_for 뒤에는 html파일 이름이 오는 게 아니라 함수이름이 온다
 
 
 
@@ -309,6 +326,19 @@ def time_mesure():
 
     return render_template('timeTest.html', timeClass= timeClass)
 
+@app.route('/time_female')
+def time_mesure_f():
+    len = TimeDB_female.query.count()
+    timeClass = TimeDB_female.query.all()
+    for timeData in range(len):
+        TimeID = TimeDB_female.query.get(timeData+1).id
+        TimeCount = TimeDB_female.query.get(timeData+1).timeCount
+        print(TimeID)
+        print(TimeCount)
+        print('{:02d}:{:02d}:{:02d}'.format(int(TimeCount) // 3600, (int(TimeCount) % 3600 // 60), int(TimeCount) % 60))
+
+    return render_template('timeTest.html', timeClass= timeClass)
+
 
 @app.route('/male/<path:name>')
 def download_fileMale(name):
@@ -318,9 +348,6 @@ def download_fileMale(name):
 def download_fileFemale(name):
     return send_from_directory('female', name)  # send_from_directory(app.static_folder, filename)
 
-@app.route('/child/<path:name>')
-def download_fileChild(name):
-    return send_from_directory('child', name)  # send_from_directory(app.static_folder, filename)
 
 
 #영어 문자로 넣은 것은 결과로 못 돌아감
@@ -382,7 +409,7 @@ def final():
     #you must first build vocabulary before training the model의 의미는 min_count로 설정되어 있는 것 만큼 많이 나타난 단어가 없다는 뜻
 
 
-    for word, score in model.most_similar("아이는"):
+    for word, score in model.most_similar("child"):
         print(word)
    # print(model.most_similar('남자는', top=5))
 
@@ -409,29 +436,14 @@ def gcp():
         "".join(fileStr) #리스트에서 문자열으로
         fileForGCP.write(fileStr)
 
-
     maleString_total_count = MaleString.query.count()
-
 
     for i in range(1,maleString_total_count+1 ):
         analyze(i)
+        entity_sentiment_text(i)
         i+=1
     # entities sentiment analysis는 한국어 지원이 안돼서 기능 안넣었음
     return render_template('google_result.html')
-
-
-
-@app.route('/show')
-def show_all():
-#    mStr = MaleString.query.count()
-#    all_descript = ""
-#    for i in range(mStr):
-#        i += 1
-#        strTest = MaleString.query.get(i).descript +'\n'
-#        all_descript +=strTest
-#    print(all_descript)
-    all_descript = MaleString.query.all()
-    return render_template('show.html', descript=all_descript)
 
 
 
