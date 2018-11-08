@@ -408,8 +408,14 @@ def final():
     print(model)
     #you must first build vocabulary before training the model의 의미는 min_count로 설정되어 있는 것 만큼 많이 나타난 단어가 없다는 뜻
 
-
+    print("most similar words with child")
     for word, score in model.most_similar("child"):
+        print(word)
+    print("most similar words with boy")
+    for word, score in model.most_similar("boy"):
+        print(word)
+    print("most similar words with girl")
+    for word, score in model.most_similar("girl"):
         print(word)
    # print(model.most_similar('남자는', top=5))
 
