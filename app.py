@@ -5,8 +5,6 @@ from Cython.Tempita._tempita import url
 from docutils.nodes import math
 from flask import Flask, render_template, request, send_from_directory, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-# from pandas.tests.test_base import T
-from websocket._http import proxy_info
 from werkzeug.utils import secure_filename
 
 # 한글 형태소 분석을 위한 패키지 import
@@ -35,8 +33,6 @@ mod: object = sys.modules[__name__]
 from google.cloud import language
 from google.cloud.language import enums
 from google.cloud.language import types
-
-import math
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
@@ -501,4 +497,4 @@ def gcp():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, port=3208)
+    app.run(debug=True)
