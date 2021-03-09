@@ -10,7 +10,8 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" type="text/css"  href="{{ url_for('static', filename='assets/css/main.css') }}" />
+{#		<link rel="stylesheet" type="text/css"  href="{{ url_for('static', filename='assets/css/main.css') }}" />#}
+        <link rel="stylesheet" type="text/css"  href="http://lov4e3.iwinv.net/exp/Male/static/assets/css/main.css" />
 
         <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
@@ -49,7 +50,8 @@
 					<section id="one" class="wrapper style2 spotlights">
 						<section>
                             <div class="inner">
-							<a class="image"><img src="{{ url_for('static', filename='images/TAT.jpg') }}" alt="" data-position="center center" /></a>
+{#							<a class="image"><img src="{{ url_for('static', filename='images/TAT.jpg') }}" alt="" data-position="center center" /></a>#}
+                             <a class="image"><img src="http://lov4e3.iwinv.net/exp/Male/static/images/TAT.jpg" alt="" data-position="center center" /></a>
                             </div>
                                 <div class="content">
 								<div class="inner">
@@ -61,12 +63,15 @@
                         <div class="features">
 								<section>
 									<span class="icon major fa-female"></span>
-                                    <h3><a href="/female">Female </a></h3>
+                                    <h3><a href="http://lov4e3.iwinv.net/exp/Male/templates/female_list">Female </a></h3>
 									<p>여성용 검사 도판</p>
 								</section>
 								<section>
 									<span class="icon major fa-male"></span>
-									<h3><a href="/male">Male </a></h3>
+
+{#									<h3><a href="http://lov4e3.iwinv.net/exp/Male/templates/male_list">Male </a></h3>#}
+                                    <h3><a href="/male/">Male </a></h3>
+{#                                    <h3><a href="/male_">Male </a></h3>#}
 									<p>남성용 검사 도판</p>
 								</section>
 
@@ -106,12 +111,18 @@
 			</div>
 
 		<!-- Scripts -->
-			<script src="{{ url_for('static', filename='assets/js/main.js') }}" ></script>
-			<script src="{{ url_for('static', filename='assets/js/jquery.scrollex.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='assets/js/jquery.scrolly.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='assets/js/skel.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+{#			<script src="{{ url_for('static', filename='assets/js/main.js') }}" ></script>#}
+            <script src="/http://lov4e3.iwinv.net/exp/Male/static/assets/css/main.css" ></script>
+            <script src="/http://lov4e3.iwinv.net/exp/Male/static/assets/js/jquery.scrollex.min.js" ></script>
+            <script src="/http://lov4e3.iwinv.net/exp/Male/static/assets/js/jquery.scrolly.min.js" ></script>
+            <script src="/http://lov4e3.iwinv.net/exp/Male/static/assets/js/skel.min.js" ></script>
+            <script src="/http://lov4e3.iwinv.net/exp/Male/static/assets/js/util.js" ></script>
+            <script src="/http://lov4e3.iwinv.net/exp/Male/static/assets/js/main.js" ></script>
+{#			<script src="{{ url_for('static', filename='assets/js/jquery.scrollex.min.js') }}"></script>#}
+{#			<script src="{{ url_for('static', filename='assets/js/jquery.scrolly.min.js') }}"></script>#}
+{#			<script src="{{ url_for('static', filename='assets/js/skel.min.js') }}"></script>#}
+{#			<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>#}
+{#			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->#}
+{#			<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>#}
 	</body>
 </html>

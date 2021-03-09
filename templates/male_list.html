@@ -9,8 +9,10 @@
 		<title>Elements - Hyperspace by HTML5 UP</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" type="text/css"  href="{{ url_for('static', filename='assets/css/main.css') }}" />
-		<noscript><link rel="stylesheet" href="{{ url_for('static', filename='assets/css/nonscript.css') }}" /></noscript>
+{#		<link rel="stylesheet" type="text/css"  href="{{ url_for('static', filename='assets/css/main.css') }}" />#}
+{#		<noscript><link rel="stylesheet" href="{{ url_for('static', filename='assets/css/nonscript.css') }}" /></noscript>#}
+        <link rel="stylesheet" type="text/css"  href="http://lov4e3.iwinv.net/exp/Male/static/assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="http://lov4e3.iwinv.net/exp/Male/static/assets/css/nonscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
 
@@ -44,7 +46,8 @@
 									<div class="row">
 										<div class="col-6 col-12-medium">
 											<ul class="alt">
-												 <li><a href="{{ url_for('writeMale') }}">새 글쓰기</a></li>
+{#												 <li><a href="{{ url_for('writeMale') }}">image file upload</a></li>#}
+                                                <li><a href="http://lov4e3.iwinv.net/exp/Male/numbers/maleNew">image file upload</a></li>
 
 												{% for male in male %}
                                                 <div id="male{{ male.id}}">
@@ -58,7 +61,7 @@
 										</div>
 									</div>
 
-                                    <a href="../google_result">결과 보러 가기</a>
+                                    <a href="http://lov4e3.iwinv.net/exp/Male/templates/google_result">결과 보러 가기</a>
 								</section>
 
 
@@ -72,13 +75,13 @@
 			</footer>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+            <script src="http://lov4e3.iwinv.net/exp/Male/static/assets/js/jquery.min.js" ></script>
+            <script src="http://lov4e3.iwinv.net/exp/Male/static/assets/js/jquery.scrollex.min.js" ></script>
+            <script src="http://lov4e3.iwinv.net/exp/Male/static/assets/js/jquery.scrolly.min.js" ></script>
+            <script src="http://lov4e3.iwinv.net/exp/Male/static/assets/js/browser.min.js" ></script>
+            <script src="http://lov4e3.iwinv.net/exp/Male/static/assets/js/breakpoints.min.js" ></script>
+            <script src="http://lov4e3.iwinv.net/exp/Male/static/assets/js/util.js" ></script>
+            <script src="http://lov4e3.iwinv.net/exp/Male/static/assets/js/main.js" ></script>
 
 	</body>
 </html>

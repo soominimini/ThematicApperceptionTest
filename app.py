@@ -225,12 +225,6 @@ def male_list():
     return render_template('male_list.html', male=male)
 
 
-@app.route('/female/')
-def female_list():
-    female = Female.query.all()
-    return render_template('female_list.html', female=female)
-
-
 # 실제 이미지 파일을 보여주는 페이지
 @app.route('/maleTest/<id>', methods=['GET', 'POST'])
 def male_detail(id):
